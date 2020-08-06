@@ -7,7 +7,7 @@
 ## 编译步骤
 
 1. (Objective-C) [编译静态库](#编译静态库)
-2. (Optionally for Swift) [编译 framework ](# Framework)
+2. (Optionally for Swift) [编译 framework ](#framework)
 
 ## 编译静态库
 
@@ -28,7 +28,7 @@ $ ./build-libopus.sh
 按照上面的步骤，从静态库中构建框架
 
 
-## Framework
+## framework
 
 #### Step 1
 
