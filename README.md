@@ -1,55 +1,50 @@
 # Opus-iOS
 
-> Opus is a totally open, royalty-free, highly versatile audio codec. Opus is unmatched for interactive speech and music transmission over the Internet, but is also intended for storage and streaming applications. It is standardized by the Internet Engineering Task Force (IETF) as RFC 6716 which incorporated technology from Skype's SILK codec and Xiph.Org's CELT codec.
+> Opus是一个完全开放、免版税、高度通用的音频编解码器。Opus在互联网上的交互式语音和音乐传输方面是无可比拟的，但也适用于存储和流媒体应用。它被互联网工程任务组(IETF)标准化为RFC 6716，其中融合了Skype的SILK编解码器和Xiph.Org的CELT编解码器的技术。
 
-iOS build scripts for the [Opus Codec](http://www.opus-codec.org).
+编译 [Opus Codec](http://www.opus-codec.org) iOS 脚本
 
-## Usage
+## 编译步骤
 
-1. (Objective-C) [Build the static library](#building-the-static-library)
-2. (Optionally for Swift) [Build the framework](#building-the-framework)
-3. (Optionally) Use the [CocoaPod spec](/opus-ios.podspec)
+1. (Objective-C) [编译静态库](#编译静态库)
+2. (Optionally for Swift) [编译 framework ](#编译 framework)
 
-## Building the Static Library
+## 编译静态库
 
 #### Step 1
 
-Download the [latest stable tar file](http://opus-codec.org/downloads/) and place it into the `build/src` directory
-
-Note: If it's a new version of opus or if the iOS SDKs changed since the last time you built it, update that version at the top of the `build-libopus.sh` file.
-
-#### Step 2
-
-From the command line, run:
+运行命令行代码：
 
 ```bash
 $ ./build-libopus.sh
 ```
 
-That will take the tar file and build the static library in a directory called `dependencies`
+将会下载源码压缩包倒`build/src`目录下，并将编译好的静态库将会放在`dependencies`目录下。
 
-#### Step 3
-
-Follow the steps above for building the framework from the static library
-
-
-## Building the Framework
-
-#### Step 1
-
-Open the `opus/opus.xcodeproj` file, select `UniversalTarget` with a `Generic iOS Device`
+**Note** 如果官网有[最新的稳定版tar文件](http://opus-codec.org/downloads/)，记得及时更新 `build-libopus.sh`文件对应的版本号。
 
 #### Step 2
 
-Build the framework by pressing Run; this will overwrite the framework in the repo root.
+按照上面的步骤，从静态库中构建框架
 
-Note: this runs a custom build script within Build Phases that will build a universal framework with both simulator and device slices
 
-If we have issues with submitting to the app store w/ the extra simulator slices, view this: http://arsenkin.com/ios-universal-framework.html / http://stackoverflow.com/a/30866648/308315
+## 编译 framework
+
+#### Step 1
+
+打开 `opus/opus.xcodeproj` 文件, 选择 `UniversalTarget` 和 `Generic iOS Device`
+
+#### Step 2
+
+运行工程，生成`opus.framework`, 文件路径在根目录下。
+
+**Note** 生成的framework适用于模拟器和真机。
+
+
 
 #### Step 3
 
-Ensure the framework includes slices for both simulator and device architectures (x86_64 i386 armv7 armv7s arm64)
+验证生成的`framework`是否支持真机和模拟器 (x86_64 i386 armv7 armv7s arm64)
 
 ```bash
 $ lipo -info opus.framework/opus
